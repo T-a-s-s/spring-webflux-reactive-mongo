@@ -1,5 +1,6 @@
 package br.com.neoholding.oi.garcom.model.entity;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -20,8 +21,8 @@ import lombok.Getter;
 @Getter 
 @Entity
 @Table(name="ITEM")
-public class Item {
-	
+public class Item  implements Serializable 
+{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID", unique=true, nullable=false)
@@ -42,11 +43,14 @@ public class Item {
 	@Column(name="FL_HIDDEN", nullable=false)
 	private Boolean FlHidden;
 	
-	@Column(name="FL_DELETED")
-	private Boolean flDeleted;
-	
 	@Column(name="DESTINATION")
 	private Destination destination;
+	
+	@Column(name = "IMAGE", nullable= false)
+	private byte[] image;
+	
+	@Column(name = "IMAGE_CONTENT_TYPE", nullable = false)
+	private String imageContentType;
 	
 	@ManyToOne
 	@JoinColumn(name="CATEGORY")
@@ -55,9 +59,6 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name="MENU_ID")
 	private Menu menu;
-	
-	@OneToOne(mappedBy="item")
-	private ItemDetail itemDetail;
 	
 	@OneToOne(mappedBy="Item")
 	private Promotion promotion;
