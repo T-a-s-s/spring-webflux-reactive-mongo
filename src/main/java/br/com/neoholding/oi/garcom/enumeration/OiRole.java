@@ -1,18 +1,18 @@
 package br.com.neoholding.oi.garcom.enumeration;
 
-public enum Role {
+public enum OiRole {
 	
-	ADMIN ("ADMIN"),
+	ADMIN ("ADMINISTRADOR"),
 	MANAGER ("GERENTE"),
-	TABLE ("MESA"),
-	WAITER ("GARÇON"),
+	CUSTOMER ("MESA"),
+	WAITER ("GARÇOM"),
 	KITCHEN ("COZINHA"),
-	KITCHEN_CUP ("COPA"),
-	ORDER_USER ("COMANDA");
+	CUP ("COPA"),
+	CARD ("COMANDA");
 	
 	private String name;
 	
-	Role (String name) {
+	OiRole(String name) {
 		this.name = name;
 	}
 
@@ -24,8 +24,8 @@ public enum Role {
 		this.name = name;
 	}
 	
-	public static Role getByName(String roleName) {
-		for(Role n : Role.values()) {
+	public static OiRole getByName(String roleName) {
+		for(OiRole n : OiRole.values()) {
 			if(n.getName().equals(roleName)) {
 				return n;
 			}
