@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
 @Repository
-public interface ManagerRepository  extends ReactiveMongoRepository<OiManager, String>
+public interface ManagerRepository extends ReactiveMongoRepository<OiManager, String>
 {
     Mono<Integer> findTopOrderNumberOrderByOrderNumber();
 }

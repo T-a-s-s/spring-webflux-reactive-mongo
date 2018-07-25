@@ -18,25 +18,39 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("v1/users")
 public class UserService {
 
-    @Autowired
     UserRepository userRepository;
-    @Autowired
     AdminRepository adminRepository;
-    @Autowired
     ManagerRepository managerRepository;
-    @Autowired
     CustomerRepository customerRepository;
-    @Autowired
     WaiterRepository waiterRepository;
-    @Autowired
     KitchenRepository kitchenRepository;
-    @Autowired
     CupRepository cupRepository;
-    @Autowired
     CardRepository cardRepository;
+    UserMapper userMapper;
 
     @Autowired
-    UserMapper userMapper;
+    public UserService(UserRepository userRepository,
+                       AdminRepository adminRepository,
+                       ManagerRepository managerRepository,
+                       CustomerRepository customerRepository,
+                       WaiterRepository waiterRepository,
+                       KitchenRepository kitchenRepository,
+                       CupRepository cupRepository,
+                       CardRepository cardRepository,
+                       UserMapper userMapper) {
+        this.userRepository = userRepository;
+        this.adminRepository = adminRepository;
+        this.managerRepository = managerRepository;
+        this.customerRepository = customerRepository;
+        this.waiterRepository = waiterRepository;
+        this.kitchenRepository = kitchenRepository;
+        this.cupRepository = cupRepository;
+        this.cardRepository = cardRepository;
+        this.userMapper = userMapper;
+    }
+
+
+
 
     @GetMapping("/{name}")
     @ResponseStatus(HttpStatus.OK)
