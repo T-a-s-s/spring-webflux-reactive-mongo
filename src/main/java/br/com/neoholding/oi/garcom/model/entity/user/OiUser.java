@@ -12,6 +12,7 @@ public class OiUser
 	private String id;
 	@Getter
 	private String name;
+	@Getter
 	private String password;
 	@Getter
 	private OiRole role;

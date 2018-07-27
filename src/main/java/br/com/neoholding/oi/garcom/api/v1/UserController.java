@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 @RestController
 @RequestMapping("v1/users")
-public class UserService {
+public class UserController {
 
     UserRepository userRepository;
     AdminRepository adminRepository;
@@ -29,15 +29,15 @@ public class UserService {
     UserMapper userMapper;
 
     @Autowired
-    public UserService(UserRepository userRepository,
-                       AdminRepository adminRepository,
-                       ManagerRepository managerRepository,
-                       CustomerRepository customerRepository,
-                       WaiterRepository waiterRepository,
-                       KitchenRepository kitchenRepository,
-                       CupRepository cupRepository,
-                       CardRepository cardRepository,
-                       UserMapper userMapper) {
+    public UserController(UserRepository userRepository,
+                          AdminRepository adminRepository,
+                          ManagerRepository managerRepository,
+                          CustomerRepository customerRepository,
+                          WaiterRepository waiterRepository,
+                          KitchenRepository kitchenRepository,
+                          CupRepository cupRepository,
+                          CardRepository cardRepository,
+                          UserMapper userMapper) {
         this.userRepository = userRepository;
         this.adminRepository = adminRepository;
         this.managerRepository = managerRepository;
