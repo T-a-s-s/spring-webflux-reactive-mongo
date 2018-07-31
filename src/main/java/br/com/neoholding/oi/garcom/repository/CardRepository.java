@@ -9,4 +9,6 @@ import reactor.core.publisher.Mono;
 public interface CardRepository extends ReactiveMongoRepository<Card, String>
 {
     Mono<Integer> findTopOrderNumberOrderByOrderNumber();
+
+    Mono<Card> findByName(String name);
 }

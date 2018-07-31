@@ -9,4 +9,6 @@ import reactor.core.publisher.Mono;
 public interface CupRepository  extends ReactiveMongoRepository<Cup, String>
 {
     Mono<Integer> findTopOrderNumberOrderByOrderNumber();
+
+    Mono<Cup> findByName(String name);
 }

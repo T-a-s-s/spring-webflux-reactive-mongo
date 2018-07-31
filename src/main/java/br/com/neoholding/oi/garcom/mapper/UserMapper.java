@@ -3,11 +3,16 @@ package br.com.neoholding.oi.garcom.mapper;
 import br.com.neoholding.oi.garcom.model.command.CreateUser;
 import br.com.neoholding.oi.garcom.model.dto.UserDTO;
 import br.com.neoholding.oi.garcom.model.entity.user.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 @Service
 public class UserMapper {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Mono<UserDTO> fromUserToDTO(Mono<OiUser> user) {
         return user.map(oiUser -> {
@@ -23,7 +28,7 @@ public class UserMapper {
         return OiAdmin
                 .builder()
                 .name(createUser.getName())
-                .password(createUser.getPassword())
+                .password(passwordEncoder.encode(createUser.getPassword()))
                 .role(createUser.getRole())
                 .build();
     }
@@ -32,7 +37,7 @@ public class UserMapper {
         return OiManager
                 .builder()
                 .name(createUser.getName())
-                .password(createUser.getPassword())
+                .password(passwordEncoder.encode(createUser.getPassword()))
                 .role(createUser.getRole())
                 .build();
     }
@@ -41,7 +46,7 @@ public class UserMapper {
         return Customer
                 .builder()
                 .name(createUser.getName())
-                .password(createUser.getPassword())
+                .password(passwordEncoder.encode(createUser.getPassword()))
                 .role(createUser.getRole())
                 .build();
     }
@@ -50,7 +55,7 @@ public class UserMapper {
         return Waiter
                 .builder()
                 .name(createUser.getName())
-                .password(createUser.getPassword())
+                .password(passwordEncoder.encode(createUser.getPassword()))
                 .role(createUser.getRole())
                 .build();
     }
@@ -59,7 +64,7 @@ public class UserMapper {
         return Kitchen
                 .builder()
                 .name(createUser.getName())
-                .password(createUser.getPassword())
+                .password(passwordEncoder.encode(createUser.getPassword()))
                 .role(createUser.getRole())
                 .build();
     }
@@ -68,7 +73,7 @@ public class UserMapper {
         return Cup
                 .builder()
                 .name(createUser.getName())
-                .password(createUser.getPassword())
+                .password(passwordEncoder.encode(createUser.getPassword()))
                 .role(createUser.getRole())
                 .build();
     }
@@ -77,7 +82,7 @@ public class UserMapper {
         return Card
                 .builder()
                 .name(createUser.getName())
-                .password(createUser.getPassword())
+                .password(passwordEncoder.encode(createUser.getPassword()))
                 .role(createUser.getRole())
                 .build();
     }

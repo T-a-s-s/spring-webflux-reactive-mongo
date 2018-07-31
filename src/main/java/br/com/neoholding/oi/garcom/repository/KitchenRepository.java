@@ -9,4 +9,6 @@ import reactor.core.publisher.Mono;
 public interface KitchenRepository extends ReactiveMongoRepository<Kitchen, String>
 {
     Mono<Integer> findTopOrderNumberOrderByOrderNumber();
+
+    Mono<Kitchen> findByName(String name);
 }

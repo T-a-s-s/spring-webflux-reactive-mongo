@@ -9,4 +9,6 @@ import reactor.core.publisher.Mono;
 public interface WaiterRepository extends ReactiveMongoRepository<Waiter, String>
 {
     Mono<Integer> findTopOrderNumberOrderByOrderNumber();
+
+    Mono<Waiter> findByName(String name);
 }
