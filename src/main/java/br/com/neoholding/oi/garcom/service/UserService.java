@@ -8,7 +8,8 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 
-public interface UserService {
+public interface UserService
+{
     Mono<UserDTO> findByName(String name);
 
     Mono<UserDTO> createUser(@Valid CreateUser createUser);

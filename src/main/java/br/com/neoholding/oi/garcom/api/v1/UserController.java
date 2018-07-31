@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @RestController
-@RequestMapping("v1/users")
+@RequestMapping("oi-garcom-api/v1/users")
 public class UserController {
 
     UserService userService;

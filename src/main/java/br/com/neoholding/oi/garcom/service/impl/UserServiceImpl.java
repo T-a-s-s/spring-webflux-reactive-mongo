@@ -1,11 +1,11 @@
 package br.com.neoholding.oi.garcom.service.impl;
 
 import br.com.neoholding.oi.garcom.exception.OiRoleNotFoundException;
-import br.com.neoholding.oi.garcom.mapper.UserMapper;
 import br.com.neoholding.oi.garcom.model.command.CreateUser;
 import br.com.neoholding.oi.garcom.model.dto.UserDTO;
 import br.com.neoholding.oi.garcom.model.dto.UserDetailsDTO;
-import br.com.neoholding.oi.garcom.repository.*;
+import br.com.neoholding.oi.garcom.model.mapper.UserMapper;
+import br.com.neoholding.oi.garcom.repository.user.*;
 import br.com.neoholding.oi.garcom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,155 +48,55 @@ public class UserServiceImpl implements UserService
 
     @Override
     public Mono<UserDetailsDTO> findUserDetailsByName(String name) {
-        return adminRepository.findByName(name)
-                .map(oiAdmin -> {
-                    return UserDetailsDTO
-                            .builder()
-                            .name(oiAdmin.getName())
-                            .password(oiAdmin.getPassword())
-                            .role(oiAdmin.getRole())
-                            .build();
-                }).switchIfEmpty(
-                    managerRepository.findByName(name)
-                    .map(oiManager -> {
-                        return UserDetailsDTO
-                                .builder()
-                                .name(oiManager.getName())
-                                .password(oiManager.getPassword())
-                                .role(oiManager.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    waiterRepository.findByName(name)
-                    .map(waiter -> {
-                        return UserDetailsDTO
-                                .builder()
-                                .name(waiter.getName())
-                                .password(waiter.getPassword())
-                                .role(waiter.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    kitchenRepository.findByName(name)
-                    .map(kitchen -> {
-                        return UserDetailsDTO
-                                .builder()
-                                .name(kitchen.getName())
-                                .password(kitchen.getPassword())
-                                .role(kitchen.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    customerRepository.findByName(name)
-                    .map(customer -> {
-                        return UserDetailsDTO
-                                .builder()
-                                .name(customer.getName())
-                                .password(customer.getPassword())
-                                .role(customer.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    kitchenRepository.findByName(name)
-                    .map(kitchen -> {
-                        return UserDetailsDTO
-                                .builder()
-                                .name(kitchen.getName())
-                                .password(kitchen.getPassword())
-                                .role(kitchen.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    cupRepository.findByName(name)
-                    .map(cup -> {
-                        return UserDetailsDTO
-                                .builder()
-                                .name(cup.getName())
-                                .password(cup.getPassword())
-                                .role(cup.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    cardRepository.findByName(name)
-                    .map(card -> {
-                        return UserDetailsDTO
-                                .builder()
-                                .name(card.getName())
-                                .password(card.getPassword())
-                                .role(card.getRole())
-                                .build();
-                    })
-                );
+        return adminRepository.findByName(name.toUpperCase())
+                    .map(oiAdmin -> { return userMapper.fromAdminToUserDetailsDTO(oiAdmin); }
+            ).switchIfEmpty(
+                managerRepository.findByName(name.toUpperCase())
+                    .map(oiManager -> { return userMapper.fromManagerToUserDetailsDTO(oiManager); })
+            ).switchIfEmpty(
+                waiterRepository.findByName(name.toUpperCase())
+                    .map(waiter -> { return userMapper.fromWaiterToUserDetailsDTO(waiter); })
+            ).switchIfEmpty(
+                kitchenRepository.findByName(name.toUpperCase())
+                    .map(kitchen -> { return userMapper.fromKitchenToUserDetailsDTO(kitchen); })
+            ).switchIfEmpty(
+                customerRepository.findByName(name.toUpperCase())
+                    .map(customer -> { return userMapper.fromCustomerToUserDetailsDTO(customer); })
+            ).switchIfEmpty(
+                cupRepository.findByName(name.toUpperCase())
+                    .map(cup -> { return userMapper.fromCupToUserDetailsDTO(cup); })
+            ).switchIfEmpty(
+                cardRepository.findByName(name.toUpperCase())
+                    .map(card -> { return userMapper.fromCardToUserDetailsDTO(card); })
+            );
     }
 
     @Override
     public Mono<UserDTO> findByName(String name) {
-        return adminRepository.findByName(name)
-                .map(oiAdmin -> {
-                    return UserDTO
-                            .builder()
-                            .name(oiAdmin.getName())
-                            .role(oiAdmin.getRole())
-                            .build();
-                }).switchIfEmpty(
-                    managerRepository.findByName(name)
-                    .map(oiManager -> {
-                        return UserDTO
-                                .builder()
-                                .name(oiManager.getName())
-                                .role(oiManager.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    waiterRepository.findByName(name)
-                    .map(waiter -> {
-                        return UserDTO
-                                .builder()
-                                .name(waiter.getName())
-                                .role(waiter.getRole())
-                                .build();
-                    })
-                ).switchIfEmpty(
-                    kitchenRepository.findByName(name)
-                    .map(kitchen -> {
-                        return UserDTO
-                                .builder()
-                                .name(kitchen.getName())
-                                .role(kitchen.getRole())
-                                .build();
-                })).switchIfEmpty(
-                    customerRepository.findByName(name)
-                    .map(customer -> {
-                        return UserDTO
-                                .builder()
-                                .name(customer.getName())
-                                .role(customer.getRole())
-                                .build();
-                })).switchIfEmpty(
-                    kitchenRepository.findByName(name)
-                    .map(kitchen -> {
-                        return UserDTO
-                                .builder()
-                                .name(kitchen.getName())
-                                .role(kitchen.getRole())
-                                .build();
-                })).switchIfEmpty(
-                    cupRepository.findByName(name)
-                    .map(cup -> {
-                        return UserDTO
-                                .builder()
-                                .name(cup.getName())
-                                .role(cup.getRole())
-                                .build();
-                })).switchIfEmpty(
-                    cardRepository.findByName(name)
-                    .map(card -> {
-                        return UserDTO
-                                .builder()
-                                .name(card.getName())
-                                .role(card.getRole())
-                                .build();
-                }));
+        return adminRepository.findByName(name.toUpperCase())
+                    .map(oiAdmin -> { return userMapper.fromAdminToDTO(oiAdmin); }
+            ).switchIfEmpty(
+                managerRepository.findByName(name.toUpperCase())
+                    .map(oiManager -> { return userMapper.fromManagerToDTO(oiManager); })
+            ).switchIfEmpty(
+                waiterRepository.findByName(name.toUpperCase())
+                    .map(waiter -> { return userMapper.fromWaiterToDTO(waiter); })
+            ).switchIfEmpty(
+                kitchenRepository.findByName(name.toUpperCase())
+                    .map(kitchen -> { return userMapper.fromKitchenToDTO(kitchen); })
+            ).switchIfEmpty(
+                customerRepository.findByName(name.toUpperCase())
+                    .map(customer -> { return userMapper.fromCustomerToDTO(customer); })
+            ).switchIfEmpty(
+                kitchenRepository.findByName(name.toUpperCase())
+                    .map(kitchen -> { return userMapper.fromKitchenToDTO(kitchen); })
+            ).switchIfEmpty(
+                cupRepository.findByName(name.toUpperCase())
+                    .map(cup -> { return userMapper.fromCupToDTO(cup);
+            })).switchIfEmpty(
+                cardRepository.findByName(name.toUpperCase())
+                    .map(card -> { return userMapper.fromCardToDTO(card);})
+            );
     }
 
     @Override
@@ -204,19 +104,19 @@ public class UserServiceImpl implements UserService
         switch (createUser.getRole())
         {
             case ADMIN:
-                return userMapper.fromAdminToDTO(adminRepository.save(userMapper.fromCreateUserToAdmin(createUser)));
+                return userMapper.fromAdminMonoToDtoMono(adminRepository.save(userMapper.fromCreateUserToAdmin(createUser)));
             case MANAGER:
-                return userMapper.fromManagerToDTO(managerRepository.save(userMapper.fromCreateUserToManager(createUser)));
+                return userMapper.fromManagerMonoToDtoMono(managerRepository.save(userMapper.fromCreateUserToManager(createUser)));
             case CUSTOMER:
-                return userMapper.fromCustomerToDTO(customerRepository.save(userMapper.fromCreateUserToCustomer(createUser)));
+                return userMapper.fromCustomerMonoToDtoMono(customerRepository.save(userMapper.fromCreateUserToCustomer(createUser)));
             case WAITER:
-                return userMapper.fromWaiterToDTO(waiterRepository.save(userMapper.fromCreateUserToWaiter(createUser)));
+                return userMapper.fromWaiterMonoToDtoMono(waiterRepository.save(userMapper.fromCreateUserToWaiter(createUser)));
             case KITCHEN:
-                return userMapper.fromKitchenToDTO(kitchenRepository.save(userMapper.fromCreateUserToKitchen(createUser)));
+                return userMapper.fromKitchenMonoToDtoMono(kitchenRepository.save(userMapper.fromCreateUserToKitchen(createUser)));
             case CUP:
-                return userMapper.fromCupToDTO(cupRepository.save(userMapper.fromCreateUserToCup(createUser)));
+                return userMapper.fromCupMonoToDtoMono(cupRepository.save(userMapper.fromCreateUserToCup(createUser)));
             case CARD:
-                return userMapper.fromCardToDTO(cardRepository.save(userMapper.fromCreateUserToCard(createUser)));
+                return userMapper.fromCardMonoToDtoMono(cardRepository.save(userMapper.fromCreateUserToCard(createUser)));
         }
         throw new OiRoleNotFoundException();
     }
@@ -224,58 +124,30 @@ public class UserServiceImpl implements UserService
     @Override
     public Flux<UserDTO> findAllUsers() {
         return adminRepository.findAll().map(oiAdmin -> {
-           return UserDTO
-                   .builder()
-                   .name(oiAdmin.getName())
-                   .role(oiAdmin.getRole())
-                   .build();
+            return userMapper.fromAdminToDTO(oiAdmin);
         }).concatWith(
             managerRepository.findAll().map(oiManager -> {
-                return UserDTO
-                        .builder()
-                        .name(oiManager.getName())
-                        .role(oiManager.getRole())
-                        .build();
+                return userMapper.fromManagerToDTO(oiManager);
+            })
+        ).concatWith(
+            waiterRepository.findAll().map(waiter -> {
+                return userMapper.fromWaiterToDTO(waiter);
             })
         ).concatWith(
             customerRepository.findAll().map(customer -> {
-                return UserDTO
-                        .builder()
-                        .name(customer.getName())
-                        .role(customer.getRole())
-                        .build();
+                return userMapper.fromCustomerToDTO(customer);
             })
         ).concatWith(
             kitchenRepository.findAll().map(kitchen -> {
-                return UserDTO
-                        .builder()
-                        .name(kitchen.getName())
-                        .role(kitchen.getRole())
-                        .build();
+                return userMapper.fromKitchenToDTO(kitchen);
             })
         ).concatWith(
             cupRepository.findAll().map(cup -> {
-                return UserDTO
-                        .builder()
-                        .name(cup.getName())
-                        .role(cup.getRole())
-                        .build();
+                return userMapper.fromCupToDTO(cup);
             })
         ).concatWith(
             cardRepository.findAll().map(card -> {
-                return UserDTO
-                        .builder()
-                        .name(card.getName())
-                        .role(card.getRole())
-                        .build();
-            })
-        ).concatWith(
-            cardRepository.findAll().map(card -> {
-                return UserDTO
-                        .builder()
-                        .name(card.getName())
-                        .role(card.getRole())
-                        .build();
+                return userMapper.fromCardToDTO(card);
             })
         );
     }
@@ -283,77 +155,49 @@ public class UserServiceImpl implements UserService
     @Override
     public Flux<UserDTO> findAllAdmins() {
         return adminRepository.findAll().map(oiAdmin -> {
-            return UserDTO
-                    .builder()
-                    .name(oiAdmin.getName())
-                    .role(oiAdmin.getRole())
-                    .build();
+            return userMapper.fromAdminToDTO(oiAdmin);
         });
     }
 
     @Override
     public Flux<UserDTO> findAllManagers() {
         return managerRepository.findAll().map(oiManager -> {
-            return UserDTO
-                    .builder()
-                    .name(oiManager.getName())
-                    .role(oiManager.getRole())
-                    .build();
+            return userMapper.fromManagerToDTO(oiManager);
         });
     }
 
     @Override
     public Flux<UserDTO> findAllCustomers() {
         return customerRepository.findAll().map(customer -> {
-            return UserDTO
-                    .builder()
-                    .name(customer.getName())
-                    .role(customer.getRole())
-                    .build();
+            return userMapper.fromCustomerToDTO(customer);
         });
     }
 
     @Override
     public Flux<UserDTO> findAllWaiters() {
         return waiterRepository.findAll().map(waiter -> {
-            return UserDTO
-                    .builder()
-                    .name(waiter.getName())
-                    .role(waiter.getRole())
-                    .build();
+            return userMapper.fromWaiterToDTO(waiter);
         });
     }
 
     @Override
     public Flux<UserDTO> findAllKitchens() {
         return kitchenRepository.findAll().map(kitchen -> {
-            return UserDTO
-                    .builder()
-                    .name(kitchen.getName())
-                    .role(kitchen.getRole())
-                    .build();
+            return userMapper.fromKitchenToDTO(kitchen);
         });
     }
 
     @Override
     public Flux<UserDTO> findAllCups() {
         return cupRepository.findAll().map(cup -> {
-            return UserDTO
-                    .builder()
-                    .name(cup.getName())
-                    .role(cup.getRole())
-                    .build();
+            return userMapper.fromCupToDTO(cup);
         });
     }
 
     @Override
     public Flux<UserDTO> findAllCards() {
         return cardRepository.findAll().map(card -> {
-            return UserDTO
-                    .builder()
-                    .name(card.getName())
-                    .role(card.getRole())
-                    .build();
+            return userMapper.fromCardToDTO(card);
         });
     }
 
