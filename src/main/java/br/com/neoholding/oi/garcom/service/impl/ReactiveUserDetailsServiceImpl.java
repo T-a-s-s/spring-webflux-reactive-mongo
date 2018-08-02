@@ -13,19 +13,22 @@ import java.util.Arrays;
 import java.util.List;
 
 //@Service("reactiveUserDetailsServiceImpl")
-public class ReactiveUserDetailsServiceImpl implements ReactiveUserDetailsService {
+public class ReactiveUserDetailsServiceImpl implements ReactiveUserDetailsService
+{
     @Autowired
     UserService userService;
 
     @Override
-    public Mono<UserDetails> findByUsername(String name) {
+    public Mono<UserDetails> findByUsername(String name)
+    {
         return userService.findUserDetailsByName(name)
                 .map(userDetailsDTO -> {
                     return new User(userDetailsDTO.getName(), userDetailsDTO.getPassword(), getAuthority(userDetailsDTO.getRole()));
                 });
     }
 
-    private List getAuthority(OiRole role) {
+    private List getAuthority(OiRole role)
+    {
         switch (role) {
             case ADMIN:
                 return Arrays.asList(new SimpleGrantedAuthority(role.getRoleName()));

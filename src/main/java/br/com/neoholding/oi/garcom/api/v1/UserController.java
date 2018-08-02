@@ -1,6 +1,7 @@
 package br.com.neoholding.oi.garcom.api.v1;
 
 import br.com.neoholding.oi.garcom.model.command.CreateUser;
+import br.com.neoholding.oi.garcom.model.command.DeleteUser;
 import br.com.neoholding.oi.garcom.model.dto.UserDTO;
 import br.com.neoholding.oi.garcom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,5 +94,12 @@ public class UserController {
     public Mono<UserDTO> createUser(@RequestBody @Valid CreateUser createUser)
     {
         return userService.createUser(createUser);
+    }
+
+    @DeleteMapping("")
+    @ResponseStatus(HttpStatus.OK)
+    public Flux<UserDTO> deleteByName(@NotNull @NotEmpty @RequestBody DeleteUser deleteUser)
+    {
+        return userService.deleteByName(deleteUser);
     }
 }

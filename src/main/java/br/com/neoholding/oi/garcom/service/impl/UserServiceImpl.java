@@ -2,6 +2,7 @@ package br.com.neoholding.oi.garcom.service.impl;
 
 import br.com.neoholding.oi.garcom.exception.OiRoleNotFoundException;
 import br.com.neoholding.oi.garcom.model.command.CreateUser;
+import br.com.neoholding.oi.garcom.model.command.DeleteUser;
 import br.com.neoholding.oi.garcom.model.dto.UserDTO;
 import br.com.neoholding.oi.garcom.model.dto.UserDetailsDTO;
 import br.com.neoholding.oi.garcom.model.mapper.UserMapper;
@@ -47,7 +48,8 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public Mono<UserDetailsDTO> findUserDetailsByName(String name) {
+    public Mono<UserDetailsDTO> findUserDetailsByName(String name)
+    {
         return adminRepository.findByName(name.toUpperCase())
                     .map(oiAdmin -> { return userMapper.fromAdminToUserDetailsDTO(oiAdmin); }
             ).switchIfEmpty(
@@ -72,7 +74,37 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public Mono<UserDTO> findByName(String name) {
+    public Flux<UserDTO> deleteByName(DeleteUser deleteUser)
+    {
+        return adminRepository.deleteByName(deleteUser.getName().toUpperCase())
+                .map(oiAdmin -> { return userMapper.fromAdminToDTO(oiAdmin); }
+                ).switchIfEmpty(
+                        managerRepository.deleteByName(deleteUser.getName().toUpperCase())
+                                .map(oiManager -> { return userMapper.fromManagerToDTO(oiManager); })
+                ).switchIfEmpty(
+                        waiterRepository.deleteByName(deleteUser.getName().toUpperCase())
+                                .map(waiter -> { return userMapper.fromWaiterToDTO(waiter); })
+                ).switchIfEmpty(
+                        kitchenRepository.deleteByName(deleteUser.getName().toUpperCase())
+                                .map(kitchen -> { return userMapper.fromKitchenToDTO(kitchen); })
+                ).switchIfEmpty(
+                        customerRepository.deleteByName(deleteUser.getName().toUpperCase())
+                                .map(customer -> { return userMapper.fromCustomerToDTO(customer); })
+                ).switchIfEmpty(
+                        kitchenRepository.deleteByName(deleteUser.getName().toUpperCase())
+                                .map(kitchen -> { return userMapper.fromKitchenToDTO(kitchen); })
+                ).switchIfEmpty(
+                        cupRepository.deleteByName(deleteUser.getName().toUpperCase())
+                                .map(cup -> { return userMapper.fromCupToDTO(cup);
+                                })).switchIfEmpty(
+                        cardRepository.deleteByName(deleteUser.getName().toUpperCase())
+                                .map(card -> { return userMapper.fromCardToDTO(card);})
+                );
+    }
+
+    @Override
+    public Mono<UserDTO> findByName(String name)
+    {
         return adminRepository.findByName(name.toUpperCase())
                     .map(oiAdmin -> { return userMapper.fromAdminToDTO(oiAdmin); }
             ).switchIfEmpty(
@@ -100,7 +132,8 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public Mono<UserDTO> createUser(@Valid CreateUser createUser) {
+    public Mono<UserDTO> createUser(@Valid CreateUser createUser)
+    {
         switch (createUser.getRole())
         {
             case ADMIN:
@@ -122,7 +155,8 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public Flux<UserDTO> findAllUsers() {
+    public Flux<UserDTO> findAllUsers()
+    {
         return adminRepository.findAll().map(oiAdmin -> {
             return userMapper.fromAdminToDTO(oiAdmin);
         }).concatWith(
@@ -153,49 +187,56 @@ public class UserServiceImpl implements UserService
     }
 
     @Override
-    public Flux<UserDTO> findAllAdmins() {
+    public Flux<UserDTO> findAllAdmins()
+    {
         return adminRepository.findAll().map(oiAdmin -> {
             return userMapper.fromAdminToDTO(oiAdmin);
         });
     }
 
     @Override
-    public Flux<UserDTO> findAllManagers() {
+    public Flux<UserDTO> findAllManagers()
+    {
         return managerRepository.findAll().map(oiManager -> {
             return userMapper.fromManagerToDTO(oiManager);
         });
     }
 
     @Override
-    public Flux<UserDTO> findAllCustomers() {
+    public Flux<UserDTO> findAllCustomers()
+    {
         return customerRepository.findAll().map(customer -> {
             return userMapper.fromCustomerToDTO(customer);
         });
     }
 
     @Override
-    public Flux<UserDTO> findAllWaiters() {
+    public Flux<UserDTO> findAllWaiters()
+    {
         return waiterRepository.findAll().map(waiter -> {
             return userMapper.fromWaiterToDTO(waiter);
         });
     }
 
     @Override
-    public Flux<UserDTO> findAllKitchens() {
+    public Flux<UserDTO> findAllKitchens()
+    {
         return kitchenRepository.findAll().map(kitchen -> {
             return userMapper.fromKitchenToDTO(kitchen);
         });
     }
 
     @Override
-    public Flux<UserDTO> findAllCups() {
+    public Flux<UserDTO> findAllCups()
+    {
         return cupRepository.findAll().map(cup -> {
             return userMapper.fromCupToDTO(cup);
         });
     }
 
     @Override
-    public Flux<UserDTO> findAllCards() {
+    public Flux<UserDTO> findAllCards()
+    {
         return cardRepository.findAll().map(card -> {
             return userMapper.fromCardToDTO(card);
         });

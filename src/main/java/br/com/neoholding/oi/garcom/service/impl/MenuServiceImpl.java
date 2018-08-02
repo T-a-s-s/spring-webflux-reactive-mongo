@@ -1,6 +1,7 @@
 package br.com.neoholding.oi.garcom.service.impl;
 
 import br.com.neoholding.oi.garcom.model.command.CreateMenu;
+import br.com.neoholding.oi.garcom.model.command.DeleteMenu;
 import br.com.neoholding.oi.garcom.model.dto.MenuDTO;
 import br.com.neoholding.oi.garcom.model.mapper.MenuMapper;
 import br.com.neoholding.oi.garcom.repository.menu.MenuRepository;
@@ -31,5 +32,10 @@ public class MenuServiceImpl implements MenuService
     @Override
     public Mono<MenuDTO> createMenu(CreateMenu createMenu) {
         return menuMapper.fromMenuMonoToDtoMono(menuRepository.save(menuMapper.fromCreateMenuToMenu(createMenu)));
+    }
+
+    @Override
+    public Flux<MenuDTO> deleteByName(DeleteMenu deleteMenu) {
+        return menuRepository.deleteByName(deleteMenu.getName().toUpperCase()).map( menu -> { return menuMapper.fromMenuToDTO(menu); });
     }
 }

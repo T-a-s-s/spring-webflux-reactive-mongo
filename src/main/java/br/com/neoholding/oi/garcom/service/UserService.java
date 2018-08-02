@@ -1,6 +1,7 @@
 package br.com.neoholding.oi.garcom.service;
 
 import br.com.neoholding.oi.garcom.model.command.CreateUser;
+import br.com.neoholding.oi.garcom.model.command.DeleteUser;
 import br.com.neoholding.oi.garcom.model.dto.UserDTO;
 import br.com.neoholding.oi.garcom.model.dto.UserDetailsDTO;
 import reactor.core.publisher.Flux;
@@ -31,4 +32,6 @@ public interface UserService
     Flux<UserDTO> findAllCards();
 
     Mono<UserDetailsDTO> findUserDetailsByName(String name);
+
+    Flux<UserDTO> deleteByName(DeleteUser deleteUser);
 }
