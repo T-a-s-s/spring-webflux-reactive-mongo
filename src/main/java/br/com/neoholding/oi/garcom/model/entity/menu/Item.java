@@ -4,12 +4,14 @@ import br.com.neoholding.oi.garcom.enumeration.Destination;
 import br.com.neoholding.oi.garcom.model.entity.promotion.Promotion;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter 
+@Getter
+@Document(collection = "Items")
 public class Item implements Serializable
 {
 	@Id

@@ -2,8 +2,9 @@ package br.com.neoholding.oi.garcom.model.entity.user;
 
 import br.com.neoholding.oi.garcom.enumeration.OiRole;
 import lombok.Builder;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document(collection = "Cards")
 public class Card extends OiUser
 {
     private Integer orderNumber;

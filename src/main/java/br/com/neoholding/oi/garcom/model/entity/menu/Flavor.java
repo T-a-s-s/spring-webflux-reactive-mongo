@@ -3,11 +3,13 @@ package br.com.neoholding.oi.garcom.model.entity.menu;
 import br.com.neoholding.oi.garcom.model.entity.promotion.Promotion;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-@Getter 
+@Getter
+@Document(collection = "Flavors")
 public class Flavor implements Serializable
 {
 	@Id

@@ -16,4 +16,5 @@ public class OiUser
 	private String password;
 	@Getter
 	private OiRole role;
+
 }
