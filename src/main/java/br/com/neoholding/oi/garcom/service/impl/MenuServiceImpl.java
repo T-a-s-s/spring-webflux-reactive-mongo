@@ -2,6 +2,7 @@ package br.com.neoholding.oi.garcom.service.impl;
 
 import br.com.neoholding.oi.garcom.model.command.CreateMenu;
 import br.com.neoholding.oi.garcom.model.command.DeleteMenu;
+import br.com.neoholding.oi.garcom.model.command.PatchMenu;
 import br.com.neoholding.oi.garcom.model.dto.MenuDTO;
 import br.com.neoholding.oi.garcom.model.mapper.MenuMapper;
 import br.com.neoholding.oi.garcom.repository.menu.MenuRepository;
@@ -25,17 +26,36 @@ public class MenuServiceImpl implements MenuService
     }
 
     @Override
-    public Flux<MenuDTO> findAll() {
+    public Flux<MenuDTO> findAll()
+    {
         return menuRepository.findAll().map( menu -> { return menuMapper.fromMenuToDTO(menu); });
     }
 
     @Override
-    public Mono<MenuDTO> createMenu(CreateMenu createMenu) {
+    public Mono<MenuDTO> createMenu(CreateMenu createMenu)
+    {
         return menuMapper.fromMenuMonoToDtoMono(menuRepository.save(menuMapper.fromCreateMenuToMenu(createMenu)));
     }
 
     @Override
-    public Flux<MenuDTO> deleteByName(DeleteMenu deleteMenu) {
+    public Flux<MenuDTO> deleteByName(DeleteMenu deleteMenu)
+    {
         return menuRepository.deleteByName(deleteMenu.getName().toUpperCase()).map( menu -> { return menuMapper.fromMenuToDTO(menu); });
+    }
+
+    @Override
+    public Mono<MenuDTO> patchMenu(String name, PatchMenu patchMenu)
+    {
+        return menuRepository.findByName(name.toUpperCase())
+                .flatMap(menu -> {
+                    menu.setName(patchMenu.getName().toUpperCase());
+                    return menuRepository.save(menu);
+                }).map(updatedMenu -> {
+                    return MenuDTO
+                            .builder()
+                            .name(updatedMenu.getName())
+                            .flActive(updatedMenu.getFlActive())
+                            .build();
+                });
     }
 }

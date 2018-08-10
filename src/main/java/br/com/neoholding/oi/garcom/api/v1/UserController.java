@@ -2,6 +2,7 @@ package br.com.neoholding.oi.garcom.api.v1;
 
 import br.com.neoholding.oi.garcom.model.command.CreateUser;
 import br.com.neoholding.oi.garcom.model.command.DeleteUser;
+import br.com.neoholding.oi.garcom.model.command.PatchUser;
 import br.com.neoholding.oi.garcom.model.dto.UserDTO;
 import br.com.neoholding.oi.garcom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +102,13 @@ public class UserController {
     public Flux<UserDTO> deleteByName(@NotNull @NotEmpty @RequestBody DeleteUser deleteUser)
     {
         return userService.deleteByName(deleteUser);
+    }
+
+    @PatchMapping("/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<UserDTO> patchUser(@PathVariable("name") @NotNull @NotEmpty String name,
+                                   @NotNull @NotEmpty @RequestBody PatchUser patchUser)
+    {
+        return userService.patchUser(name, patchUser);
     }
 }

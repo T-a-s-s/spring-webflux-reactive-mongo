@@ -1,6 +1,5 @@
 package br.com.neoholding.oi.garcom.model.entity.menu;
 
-import br.com.neoholding.oi.garcom.model.entity.promotion.Promotion;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -15,13 +14,11 @@ public class Flavor implements Serializable
 	@Id
 	private String id;
 	private String name;
-	private BigDecimal value;
 	private String description;
+	private BigDecimal value;
 	private Integer orderNumber;
 	private Boolean flHidden;
-	private byte[] image;
-	private String imageContentType;
-	private Item item;
-	private Promotion promotion;
-	private NutritionalInfo nutritionalInfo;
+	private String image;
+	private String promotion;
+	private String nutritionalInfo;
 }

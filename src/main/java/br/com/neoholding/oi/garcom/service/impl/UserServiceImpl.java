@@ -3,6 +3,7 @@ package br.com.neoholding.oi.garcom.service.impl;
 import br.com.neoholding.oi.garcom.exception.OiRoleNotFoundException;
 import br.com.neoholding.oi.garcom.model.command.CreateUser;
 import br.com.neoholding.oi.garcom.model.command.DeleteUser;
+import br.com.neoholding.oi.garcom.model.command.PatchUser;
 import br.com.neoholding.oi.garcom.model.dto.UserDTO;
 import br.com.neoholding.oi.garcom.model.dto.UserDetailsDTO;
 import br.com.neoholding.oi.garcom.model.mapper.UserMapper;
@@ -14,6 +15,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Service
 public class UserServiceImpl implements UserService
@@ -100,6 +103,87 @@ public class UserServiceImpl implements UserService
                         cardRepository.deleteByName(deleteUser.getName().toUpperCase())
                                 .map(card -> { return userMapper.fromCardToDTO(card);})
                 );
+    }
+
+    @Override
+    public Mono<UserDTO> patchUser(@NotNull @NotEmpty String name, @NotNull @NotEmpty PatchUser patchUser) {
+        return adminRepository.findByName(name)
+                .flatMap(oiAdmin -> {
+                    oiAdmin.setName(patchUser.getName());
+                    return adminRepository.save(oiAdmin);
+                }).map(updatedAdmin -> {
+                    return UserDTO
+                            .builder()
+                            .name(updatedAdmin.getName())
+                            .role(updatedAdmin.getRole())
+                            .build();
+                }).switchIfEmpty(
+                    managerRepository.findByName(name)
+                            .flatMap(oiManager -> {
+                                oiManager.setName(patchUser.getName());
+                                return managerRepository.save(oiManager);
+                            }).map(updatedUser -> {
+                        return UserDTO
+                                .builder()
+                                .name(updatedUser.getName())
+                                .role(updatedUser.getRole())
+                                .build();
+                })).switchIfEmpty(
+                    waiterRepository.findByName(name)
+                            .flatMap(waiter -> {
+                                waiter.setName(patchUser.getName());
+                                return waiterRepository.save(waiter);
+                            }).map(updatedUser -> {
+                        return UserDTO
+                                .builder()
+                                .name(updatedUser.getName())
+                                .role(updatedUser.getRole())
+                                .build();
+                })).switchIfEmpty(
+                    customerRepository.findByName(name)
+                            .flatMap(customer -> {
+                                customer.setName(patchUser.getName());
+                                return customerRepository.save(customer);
+                            }).map(updatedUser -> {
+                        return UserDTO
+                                .builder()
+                                .name(updatedUser.getName())
+                                .role(updatedUser.getRole())
+                                .build();
+                })).switchIfEmpty(
+                    kitchenRepository.findByName(name)
+                            .flatMap(kitchen -> {
+                                kitchen.setName(patchUser.getName());
+                                return kitchenRepository.save(kitchen);
+                            }).map(updatedUser -> {
+                        return UserDTO
+                                .builder()
+                                .name(updatedUser.getName())
+                                .role(updatedUser.getRole())
+                                .build();
+                })).switchIfEmpty(
+                    cupRepository.findByName(name)
+                            .flatMap(cup -> {
+                                cup.setName(patchUser.getName());
+                                return cupRepository.save(cup);
+                            }).map(updatedUser -> {
+                        return UserDTO
+                                .builder()
+                                .name(updatedUser.getName())
+                                .role(updatedUser.getRole())
+                                .build();
+                })).switchIfEmpty(
+                    cardRepository.findByName(name)
+                            .flatMap(card -> {
+                                card.setName(patchUser.getName());
+                                return cardRepository.save(card);
+                            }).map(updatedUser -> {
+                        return UserDTO
+                                .builder()
+                                .name(updatedUser.getName())
+                                .role(updatedUser.getRole())
+                                .build();
+                }));
     }
 
     @Override

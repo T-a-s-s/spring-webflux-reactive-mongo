@@ -2,6 +2,7 @@ package br.com.neoholding.oi.garcom.model.entity.menu;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,8 +16,10 @@ public class Menu implements Serializable
 {
 	@Id
 	private String id;
+	@Setter
 	private String name;
 	private Boolean flActive;
 	private Integer orderNumber;
-	private List<Item> items;
+	@Setter
+	private List<String> categories;
 }

@@ -11,7 +11,7 @@ public class MenuMapper {
     public MenuDTO fromMenuToDTO(Menu menu) {
         return MenuDTO
                 .builder()
-                .name(menu.getName())
+                .name(menu.getName().toUpperCase())
                 .flActive(menu.getFlActive())
                 .build();
     }
