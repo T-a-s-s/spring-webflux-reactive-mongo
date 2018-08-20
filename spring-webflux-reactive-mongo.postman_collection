@@ -1,0 +1,649 @@
+{
+	"info": {
+		"_postman_id": "612c928a-5228-4a3a-86c4-60b53abdbae8",
+		"name": "JAVA-BR-NEO-OI-GARCOM-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createUser",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"TOM\",\n\t\"password\":\"skatalites\",\n\t\"role\":\"ADMIN\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findUserByName",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllUsers",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllAdmins",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users/admins",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users",
+						"admins"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllManagers",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users/managers",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users",
+						"managers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllWaiters",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users/waiters",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users",
+						"waiters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllKitchens",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users/kitchens",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users",
+						"kitchens"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllCups",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users/cups",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users",
+						"cups"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllCards",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users/cards",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users",
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteUserByName",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"TOM\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patchUser",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Cardápio 01\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/menus/CARDAPIO_01",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"menus",
+						"CARDAPIO_01"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createMenu",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"01\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/menus",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"menus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findAllMenus",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/menus",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"menus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMenuByName",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"CARDÁPIO 01\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/menus",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"menus"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "patchMenu",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"Cardápio 01\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/menus/CARDAPIO_01",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"menus",
+						"CARDAPIO_01"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCategory",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "skatalites",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "tass",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"01\",\n\t\"menu\":\"01\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/oi-garcom-api/v1/categories",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oi-garcom-api",
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
